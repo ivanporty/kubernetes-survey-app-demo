@@ -19,7 +19,7 @@ spec:
         run: notification-service
     spec:
       containers:
-      - image: gcr.io/qingyangc-sandbox/notification-service
+      - image: gcr.io/devoxx2019/notification-service
         name: notification-service
         ports:
         - containerPort: 3000

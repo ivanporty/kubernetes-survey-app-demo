@@ -19,7 +19,7 @@ spec:
         run: frontend-service
     spec:
       containers:
-      - image: gcr.io/qingyangc-sandbox/frontend-service
+      - image: gcr.io/devoxx2019/frontend-service
         name: frontend-service
         ports:
         - containerPort: 8080
