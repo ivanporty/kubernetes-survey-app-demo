@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-service
+  labels:
+    app: frontend-service
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: frontend-service
+      labels:
+        app: frontend-service
+    spec:
+      containers:
+        - name: frontend-service
+          image: gcr.io/devoxx2019/frontend-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: frontend-service

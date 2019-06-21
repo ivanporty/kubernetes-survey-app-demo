@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC. All rights reserved.
+ * Copyright 2019 Google LLC. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,6 +16,8 @@
 
 package vote;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +30,13 @@ import java.util.Map;
 
 @RestController
 public class VoteController {
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private static final Map<String, Integer> votes = new HashMap<>();
+  private final Map<String, Integer> votes = new HashMap<>();
 
   @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public ResponseEntity<String> vote(@RequestBody Map<String, Integer> newVotes) {
-    System.out.println("Got new votes: " + newVotes);
+    logger.info("Got new votes: {}", newVotes);
 
     for (Map.Entry<String, Integer> vote : newVotes.entrySet()) {
       int count = 1;
@@ -43,15 +46,20 @@ public class VoteController {
       votes.put(vote.getKey(), count);
     }
 
-    System.out.println("Notifying new votes...");
+    logger.info("Notifying new votes via notification-service...");
 
     RestTemplate restTemplate = new RestTemplate();
     HttpEntity<Map<String, Integer>> entity = new HttpEntity<>(votes);
     ResponseEntity<String> s = restTemplate.exchange("http://notification-service/notify", HttpMethod.POST, entity, String.class);
-    System.out.println("Got response: " + s.getBody());
+    logger.info("Response from notification-service: {}", s.getBody());
 
-    System.out.println("Updated votes: " + votes);
+    logger.info("Current votes: {}", votes);
 
     return ResponseEntity.ok().build();
+  }
+
+  @RequestMapping(value = "/debugVote")
+  public String debugVote() {
+    return "Votes: " + votes.toString();
   }
 }
