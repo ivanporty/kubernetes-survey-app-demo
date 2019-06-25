@@ -1,6 +1,6 @@
 # Kubernetes Survey App Demo
 
-This repository contains a demo we did to showcase continuous development on Kubernetes with [Skaffold](https://github.com/GoogleContainerTools/skaffold) and [Jib](https://github.com/GoogleContainerTools/jib). We gave the demo during the Skaffold for Java talk at Oracle Code One 2018.
+This repository contains a demo we did to showcase continuous development with Cloud Code. I gave the demo during the Cloud Code for Java talk at Devoxx Poland 2019.
 
 ## How to set up the demo
 
@@ -17,7 +17,7 @@ This repository contains a demo we did to showcase continuous development on Kub
 1. Clone the repository:
 
     ```bash
-    $ git clone https://github.com/coollog/kubernetes-survey-app-demo
+    $ git clone https://github.com/ivanporty/kubernetes-survey-app-demo
     ```
 
 ### Step 2 - set up ingress
@@ -41,11 +41,9 @@ This repository contains a demo we did to showcase continuous development on Kub
 
 1. Make sure `kubectl` is configured correctly.
 
-1. Start Skaffold:
+1. Add support with Cloud Code
 
-    ```bash
-    $ skaffold dev
-    ```
+2. Deploy microservices one by one from IDEs
 
 1. Once everything is up and running, visit your app at its domain name (or external IP).
 
@@ -104,7 +102,7 @@ The following is a script for the demo:
 
 ## What are the three services?
 
-`frontend-service` - Micronaut/Groovy
+`frontend-service` - kotlin/ktor
 
 - `/` - take the survey
 - `/results` - survey results page
