@@ -49,7 +49,7 @@ public class VoteController {
     logger.info("Notifying new votes via notification-service...");
 
     RestTemplate restTemplate = new RestTemplate();
-    HttpEntity<Map<String, Integer>> entity = new HttpEntity<>(newVotes);
+    HttpEntity<Map<String, Integer>> entity = new HttpEntity<>(votes);
     ResponseEntity<String> notificationResponse =
             restTemplate.exchange("http://notification-service/notify", HttpMethod.POST, entity, String.class);
 

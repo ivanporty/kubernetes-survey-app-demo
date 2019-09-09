@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-group = "Example"
+group = "frontend-service"
 version = "0.1.0-SNAPSHOT"
 
 val ktor_version = "1.0.1"
@@ -24,13 +24,14 @@ tasks.withType<KotlinCompile>().all {
 }
 
 application {
-  mainClassName = "MainKt"
+  mainClassName = "frontend.FrontendApplicationKt"
 }
 
 dependencies {
   compile(kotlin("stdlib-jdk8"))
   compile("io.ktor:ktor-server-netty:$ktor_version")
   compile("io.ktor:ktor-jackson:$ktor_version")
+  compile("io.ktor:ktor-client-core:$ktor_version")
   compile("ch.qos.logback:logback-classic:1.2.3")
   testCompile(group = "junit", name = "junit", version = "4.12")
 }
@@ -38,5 +39,6 @@ dependencies {
 jib {
   container {
     ports = listOf("8080")
+    mainClass = application.mainClassName
   }
 }

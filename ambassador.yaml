@@ -33,7 +33,6 @@ metadata:
       service: none
 spec:
   type: LoadBalancer
-  loadBalancerIP: {EXTERNAL_IP}
   ports:
   - name: ambassador
     port: 80

@@ -1,0 +1,11 @@
+apiVersion: skaffold/v1beta11
+kind: Config
+build:
+  artifacts:
+  - image: gcr.io/devoxx2019/frontend-service
+    jibGradle: {}
+deploy:
+  kubectl:
+    manifests:
+    - k8s/frontend-deploy.yaml
+    - k8s/frontend-svc.yaml
