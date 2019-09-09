@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: vote-service
-          image: gcr.io/devoxx2019/vote-service
+          image: gcr.io/codeone2019/vote-service
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081

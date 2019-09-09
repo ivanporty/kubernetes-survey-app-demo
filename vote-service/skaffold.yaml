@@ -2,7 +2,7 @@ apiVersion: skaffold/v1beta11
 kind: Config
 build:
   artifacts:
-  - image: gcr.io/devoxx2019/vote-service
+  - image: gcr.io/codeone2019/vote-service
     jibGradle: {}
 deploy:
   kubectl:
