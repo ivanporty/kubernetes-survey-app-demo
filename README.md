@@ -1,6 +1,6 @@
 # Kubernetes Voting App Demo
 
-This repository contains a demo we did to showcase Kubernetes bootstrap, continuous development and then live one-click debugging on the remote K8s cluster with Cloud Code and IntelliJ. I gave the demo during the Cloud Code for Java talk at Devoxx Poland 2019.
+This repository contains a demo we did to showcase Kubernetes bootstrap, continuous development and then live one-click debugging on the remote K8s cluster with Cloud Code and IntelliJ. I gave the demo during the Cloud Code for Java talk at Devoxx Poland 2019 and Oracle CodeOne 2019 (ex. JavaOne) in SF.
 
 ## How to set up the demo
 
