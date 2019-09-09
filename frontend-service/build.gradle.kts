@@ -8,7 +8,7 @@ val ktor_version = "1.0.1"
 plugins {
   application
   kotlin("jvm") version "1.3.10"
-  id("com.google.cloud.tools.jib") version "1.2.0"
+  id("com.google.cloud.tools.jib") version "1.5.1"
 }
 
 repositories {
