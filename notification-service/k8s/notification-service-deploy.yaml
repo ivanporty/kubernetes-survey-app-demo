@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: notification-service
-          image: gcr.io/devoxx2019/notification-service
+          image: gcr.io/codeone2019/notification-service
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
