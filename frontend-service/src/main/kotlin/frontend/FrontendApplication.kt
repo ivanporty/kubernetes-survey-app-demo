@@ -29,5 +29,6 @@ fun Application.module() {
 }
 
 fun main() {
-    embeddedServer(Netty, 8080, watchPaths = listOf("NotesAppKt"), module = Application::module).start()
+    embeddedServer(Netty, 8080, watchPaths = listOf("NotesAppKt"),
+            module = Application::module).start()
 }
