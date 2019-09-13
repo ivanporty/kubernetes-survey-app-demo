@@ -30,36 +30,42 @@ import java.util.Map;
 
 @RestController
 public class VoteController {
-  private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private final Map<String, Integer> votes = new HashMap<>();
+    private final Map<String, Integer> votes = new HashMap<>();
 
-  @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<String> vote(@RequestBody Map<String, Integer> newVotes) {
-    logger.info("Got new votes: {}", newVotes);
+    @RequestMapping(value = "/", method = RequestMethod.POST, consumes =
+            MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<String> vote(
+            @RequestBody Map<String, Integer> newVotes) {
+        logger.info("Got new votes: {}", newVotes);
 
-    for (Map.Entry<String, Integer> vote : newVotes.entrySet()) {
-      int count = 1;
-      if (votes.containsKey(vote.getKey())) {
-        count += votes.get(vote.getKey());
-      }
-      votes.put(vote.getKey(), count);
+        for (Map.Entry<String, Integer> vote : newVotes.entrySet()) {
+            int count = 1;
+            if (votes.containsKey(vote.getKey())) {
+                count += votes.get(vote.getKey());
+            }
+            votes.put(vote.getKey(), count);
+        }
+
+        logger.info("Notifying new votes via notification-service...");
+
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<Map<String, Integer>> entity = new HttpEntity<>(newVotes);
+        ResponseEntity<String> notificationResponse =
+                restTemplate.exchange(
+                        "http://notification-service/notify",
+                        HttpMethod.POST,
+                        entity,
+                        String.class);
+
+        logger.info("Current votes: {}", newVotes);
+
+        return ResponseEntity.ok().build();
     }
 
-    logger.info("Notifying new votes via notification-service...");
-
-    RestTemplate restTemplate = new RestTemplate();
-    HttpEntity<Map<String, Integer>> entity = new HttpEntity<>(votes);
-    ResponseEntity<String> notificationResponse =
-            restTemplate.exchange("http://notification-service/notify", HttpMethod.POST, entity, String.class);
-
-    logger.info("Current votes: {}", votes);
-
-    return ResponseEntity.ok().build();
-  }
-
-  @RequestMapping(value = "/debugVote")
-  public String debugVote() {
-    return "Votes: " + votes.toString();
-  }
+    @RequestMapping(value = "/debugVote")
+    public String debugVote() {
+        return "Votes: " + votes.toString();
+    }
 }

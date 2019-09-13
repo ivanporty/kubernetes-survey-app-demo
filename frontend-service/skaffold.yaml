@@ -1,9 +1,10 @@
-apiVersion: skaffold/v1beta11
+apiVersion: skaffold/v1beta13
 kind: Config
 build:
   artifacts:
   - image: gcr.io/codeone2019/frontend-service
-    jibGradle: {}
+    jibGradle:
+      {}
 deploy:
   kubectl:
     manifests:

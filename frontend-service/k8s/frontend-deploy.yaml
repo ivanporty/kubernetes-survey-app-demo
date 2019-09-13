@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend-service
-          image: gcr.io/code2019/frontend-service
+          image: gcr.io/codeone2019/frontend-service
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
   selector:
